@@ -1,7 +1,7 @@
 const express = require("express");
 const bots = require("./src/botsData");
 const shuffle = require("./src/shuffle");
-
+const cors = require('cors')
 
 // include and initialize the rollbar library with your access token
 var Rollbar = require('rollbar')
@@ -26,6 +26,7 @@ const app = express();
 app.use(express.json());
 // app.use(express.static('public'))
 app.use(express.static(`${__dirname}/public`))
+app.use(cors())
 
 // Add up the total health of all the robots
 const calculateTotalHealth = (robots) =>

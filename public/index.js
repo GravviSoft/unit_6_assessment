@@ -26,6 +26,10 @@ compDuoHeader.classList.add("hide");
 
 const baseUrl = 'http://18.237.75.186'
 
+
+// const baseUrl = 'http://localhost:8000'
+
+
 const makeRobotChoiceCard = (bot) => {
   return `
         <div class="bot-card outline">
