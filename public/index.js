@@ -23,6 +23,9 @@ chooseHeader.classList.add("hide");
 yourDuoHeader.classList.add("hide");
 compDuoHeader.classList.add("hide");
 
+
+const baseUrl = 'http://18.237.75.186'
+
 const makeRobotChoiceCard = (bot) => {
   return `
         <div class="bot-card outline">
@@ -118,7 +121,7 @@ const putBotBack = (id) => {
 };
 
 const drawFive = () => {
-  axios.get("/api/robots/shuffled").then((res) => {
+  axios.get(`${baseUrl}/api/robots/shuffled`).then((res) => {
     const shuffledBots = res.data;
     choices = shuffledBots.slice(0, 5);
     compDuo = shuffledBots.slice(6, 8);
@@ -139,7 +142,7 @@ const duel = () => {
     .querySelectorAll(".bot-btn")
     .forEach((btn) => btn.classList.add("hide"));
   setTimeout(() => {
-    axios.post("/api/duel", { compDuo, playerDuo }).then(({ data }) => {
+    axios.post(`${baseUrl}/api/duel`, { compDuo, playerDuo }).then(({ data }) => {
       resultsText.textContent = data;
       playAgainBtn.classList.remove("hide");
       getPlayerStats();
@@ -161,14 +164,14 @@ const reset = () => {
 };
 
 const getPlayerStats = () => {
-  axios.get("/api/player").then(({ data: { wins, losses } }) => {
+  axios.get(`${baseUrl}/api/player`).then(({ data: { wins, losses } }) => {
     winsText.textContent = `Wins: ${wins}`;
     lossesTest.textContent = `Losses: ${losses}`;
   });
 };
 
 const getAllBots = () => {
-  axios.get("/api/robots").then(({ data }) => {
+  axios.get(`${baseUrl}/api/robots`).then(({ data }) => {
     allBotsDiv.innerHTML = "";
 
     data.forEach((bot) => {
